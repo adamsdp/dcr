@@ -229,11 +229,19 @@
 <footer>
   <div class="wrap">
     <p>Independent re-run prepared with Claude (Anthropic) from the House of Commons Library&rsquo;s open data. This is an explainer, not a forecast or a policy position.</p>
-    <p>Questions, corrections or feedback: <a href="mailto:support@rdcr.uk">support@rdcr.uk</a></p>
+    <form id="contact" class="contact" hidden data-endpoint="">
+      <h3>Questions, corrections or feedback</h3>
+      <label>Your email (so I can reply)<input type="email" name="email" required autocomplete="email"></label>
+      <label>Message<textarea name="message" rows="4" required maxlength="4000"></textarea></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr" aria-hidden="true">
+      <button type="submit">Send</button>
+      <p id="contact-status" role="status"></p>
+    </form>
   </div>
 </footer>
 
 <script src="assets/engine.js"></script>
 <script src="assets/app.js"></script>
+<script src="assets/contact.js"></script>
 </body>
 </html>

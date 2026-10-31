@@ -91,3 +91,10 @@ ul.tight li{margin:6px 0}
 footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--muted);font-size:.9rem}
 code{font:.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--accent-soft);padding:1px 5px;border-radius:4px}
 .sr{position:absolute;left:-9999px}
+
+/* contact form */
+.contact{max-width:520px;margin-top:18px}
+.contact h3{margin:0 0 8px}
+.contact label{display:block;font-weight:600;font-size:.9rem;margin:10px 0}
+.contact input[type=email],.contact textarea{display:block;width:100%;margin-top:4px;padding:8px;font:inherit;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.contact button{border:0;background:var(--accent);color:var(--bg);padding:9px 18px;border-radius:8px;font:inherit;cursor:pointer}
