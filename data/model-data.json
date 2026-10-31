@@ -1,0 +1,333 @@
+{
+ "T": {
+  "North East": 26,
+  "North West": 73,
+  "Yorkshire and the Humber": 53,
+  "East Midlands": 48,
+  "West Midlands": 58,
+  "East of England": 62,
+  "London": 85,
+  "South East": 90,
+  "South West": 55,
+  "Scotland": 52,
+  "Wales": 30,
+  "Northern Ireland": 18
+ },
+ "C": {
+  "North East": 13,
+  "North West": 37,
+  "Yorkshire and the Humber": 27,
+  "East Midlands": 24,
+  "West Midlands": 29,
+  "East of England": 31,
+  "London": 43,
+  "South East": 45,
+  "South West": 28,
+  "Scotland": 26,
+  "Wales": 15,
+  "Northern Ireland": 9
+ },
+ "regions": [
+  "North East",
+  "North West",
+  "Yorkshire and the Humber",
+  "East Midlands",
+  "West Midlands",
+  "East of England",
+  "London",
+  "South East",
+  "South West",
+  "Scotland",
+  "Wales",
+  "Northern Ireland"
+ ],
+ "votes": {
+  "North East": {
+   "Con": 224584,
+   "Lab": 504569,
+   "LD": 65385,
+   "Reform": 220875,
+   "Green": 66680,
+   "Others": 29447
+  },
+  "North West": {
+   "Con": 581099,
+   "Lab": 1361196,
+   "LD": 242662,
+   "Reform": 512115,
+   "Green": 217092,
+   "Speaker": 25238,
+   "Others": 153060
+  },
+  "Yorkshire and the Humber": {
+   "Con": 506450,
+   "Lab": 907767,
+   "LD": 158326,
+   "Reform": 371658,
+   "Green": 167514,
+   "Others": 110232
+  },
+  "East Midlands": {
+   "Con": 626568,
+   "Lab": 753723,
+   "LD": 136929,
+   "Reform": 403470,
+   "Green": 133447,
+   "Others": 79524
+  },
+  "West Midlands": {
+   "Con": 669368,
+   "Lab": 824433,
+   "LD": 214493,
+   "Reform": 439278,
+   "Green": 159140,
+   "Others": 119145
+  },
+  "East of England": {
+   "Con": 869447,
+   "Lab": 834896,
+   "LD": 375642,
+   "Reform": 496237,
+   "Green": 195665,
+   "Others": 67432
+  },
+  "London": {
+   "Con": 685082,
+   "Lab": 1432622,
+   "LD": 367424,
+   "Reform": 289459,
+   "Green": 335479,
+   "Others": 223916
+  },
+  "South East": {
+   "Con": 1332755,
+   "Lab": 1067897,
+   "LD": 951222,
+   "Reform": 609281,
+   "Green": 299665,
+   "Others": 90596
+  },
+  "South West": {
+   "Con": 785672,
+   "Lab": 682080,
+   "LD": 686921,
+   "Reform": 384240,
+   "Green": 206780,
+   "Others": 39737
+  },
+  "Scotland": {
+   "Con": 307344,
+   "Lab": 851897,
+   "LD": 234228,
+   "Reform": 167979,
+   "Green": 92685,
+   "SNP": 724758,
+   "Others": 35919
+  },
+  "Wales": {
+   "Con": 240003,
+   "Lab": 487636,
+   "LD": 85911,
+   "Reform": 223018,
+   "Green": 61662,
+   "Plaid": 194811,
+   "Others": 26035
+  },
+  "Northern Ireland": {
+   "Con": 553,
+   "Green": 8692,
+   "DUP": 172058,
+   "SF": 210891,
+   "SDLP": 86861,
+   "UUP": 94779,
+   "Alliance": 117191,
+   "TUV": 48685,
+   "PBP": 8438,
+   "Aontu": 7466,
+   "Others": 24226
+  }
+ },
+ "actual": {
+  "North East": {
+   "Lab": 26,
+   "Con": 1
+  },
+  "North West": {
+   "Lab": 65,
+   "Independent": 1,
+   "LD": 3,
+   "Con": 3,
+   "Speaker": 1
+  },
+  "Yorkshire and the Humber": {
+   "Lab": 43,
+   "Con": 9,
+   "Independent": 1,
+   "LD": 1
+  },
+  "East Midlands": {
+   "Lab": 29,
+   "Reform": 2,
+   "Con": 15,
+   "Independent": 1
+  },
+  "West Midlands": {
+   "Con": 15,
+   "Lab": 38,
+   "Independent": 1,
+   "Green": 1,
+   "LD": 2
+  },
+  "East of England": {
+   "Con": 23,
+   "Lab": 27,
+   "LD": 7,
+   "Reform": 3,
+   "Green": 1
+  },
+  "London": {
+   "Lab": 59,
+   "Con": 9,
+   "LD": 6,
+   "Independent": 1
+  },
+  "South East": {
+   "Lab": 36,
+   "Con": 30,
+   "LD": 24,
+   "Green": 1
+  },
+  "South West": {
+   "LD": 22,
+   "Lab": 24,
+   "Con": 11,
+   "Green": 1
+  },
+  "Scotland": {
+   "SNP": 9,
+   "Lab": 37,
+   "Con": 5,
+   "LD": 6
+  },
+  "Wales": {
+   "Lab": 27,
+   "LD": 1,
+   "Plaid": 4
+  },
+  "Northern Ireland": {
+   "DUP": 5,
+   "SF": 7,
+   "SDLP": 2,
+   "Alliance": 1,
+   "TUV": 1,
+   "Independent": 1,
+   "UUP": 1
+  }
+ },
+ "central": {
+  "North East": {
+   "Lab": 13
+  },
+  "North West": {
+   "Lab": 33,
+   "Con": 1,
+   "LD": 2,
+   "Speaker": 1
+  },
+  "Yorkshire and the Humber": {
+   "Lab": 21,
+   "Con": 5,
+   "LD": 1
+  },
+  "East Midlands": {
+   "Lab": 14,
+   "Con": 9,
+   "Reform": 1
+  },
+  "West Midlands": {
+   "Lab": 19,
+   "Con": 9,
+   "LD": 1
+  },
+  "East of England": {
+   "Lab": 14,
+   "Con": 13,
+   "LD": 3,
+   "Reform": 1
+  },
+  "London": {
+   "Lab": 35,
+   "Con": 5,
+   "LD": 3
+  },
+  "South East": {
+   "Lab": 17,
+   "Con": 15,
+   "LD": 12,
+   "Green": 1
+  },
+  "South West": {
+   "Lab": 12,
+   "Con": 5,
+   "LD": 11
+  },
+  "Scotland": {
+   "Lab": 16,
+   "SNP": 4,
+   "Con": 3,
+   "LD": 3
+  },
+  "Wales": {
+   "Lab": 12,
+   "Plaid": 2,
+   "LD": 1
+  },
+  "Northern Ireland": {
+   "SF": 4,
+   "DUP": 2,
+   "SDLP": 1,
+   "Alliance": 1,
+   "UUP": 1
+  }
+ },
+ "nonGroupings": [
+  "Aontu",
+  "Independent",
+  "Others",
+  "PBP",
+  "Speaker"
+ ],
+ "fptp": {
+  "Lab": 411,
+  "Con": 121,
+  "Independent": 6,
+  "LD": 72,
+  "Speaker": 1,
+  "Reform": 5,
+  "Green": 4,
+  "SNP": 9,
+  "Plaid": 4,
+  "DUP": 5,
+  "SF": 7,
+  "SDLP": 2,
+  "Alliance": 1,
+  "TUV": 1,
+  "UUP": 1
+ },
+ "gpPublished": {
+  "Lab": 233,
+  "Con": 161,
+  "Reform": 96,
+  "LD": 78,
+  "Green": 41,
+  "SNP": 17,
+  "Plaid": 5,
+  "SF": 5,
+  "DUP": 4,
+  "Alliance": 3,
+  "UUP": 3,
+  "SDLP": 2,
+  "TUV": 1,
+  "Speaker": 1
+ }
+}

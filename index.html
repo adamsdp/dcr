@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direct–Compensatory Representation: what 2024 might have looked like</title>
+<meta name="description" content="An interactive explainer of a proposed UK voting system, re-run independently on the corrected 2024 general election results.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <strong>Direct–Compensatory Representation</strong>
+    <nav aria-label="Sections">
+      <a href="#problem">The problem</a>
+      <a href="#how">How it works</a>
+      <a href="#explore">Try it</a>
+      <a href="#findings">Findings</a>
+      <a href="#compare">Two models</a>
+      <a href="#suitability">Is it suitable?</a>
+      <a href="#data">Data &amp; code</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="hero">
+  <h1>What if 2024 had been counted differently?</h1>
+  <p class="lede">A proposed UK voting system keeps local MPs but tops up each region so seats track votes. We re-ran it from scratch on the official 2024 results. This page explains the idea, lets you change the settings yourself, and says plainly where it is strong and where it is not.</p>
+  <div class="stats">
+    <div class="stat"><b>63%</b><span>of seats won by Labour in 2024 (411 of 650) on 33.7% of the vote</span></div>
+    <div class="stat"><b>5</b><span>seats for Reform UK on 14.3% of the vote under first-past-the-post</span></div>
+    <div class="stat"><b>234</b><span>Labour seats under the proposal on the same votes, 92 short of a majority</span></div>
+  </div>
+</div>
+
+<section id="problem">
+  <h2>The problem it tries to solve</h2>
+  <p>In a first-past-the-post election, each constituency elects whoever has the most votes, and the national result is just the sum. Votes for losing candidates have no effect on the outcome, so seat shares can drift a long way from vote shares. In 2024 they drifted a long way:</p>
+  <div class="card bars" id="fptp-wrap">
+    <div class="keyline"><span class="kv">Share of votes</span><span class="ks">Share of seats</span></div>
+    <div id="fptp-bars"></div>
+  </div>
+  <p style="margin-top:14px">Political scientists summarise this gap with the <strong>Gallagher index</strong>: 0 means seats exactly match votes, and higher means a bigger mismatch. For 2024 under first-past-the-post it is about <strong>23.8</strong>, or 23.2 if you leave out the small parties and independents that can&rsquo;t be represented in the model. We computed both from the official results.</p>
+</section>
+
+<section id="how">
+  <h2>How the proposal works</h2>
+  <p>The Green Paper behind this site proposes <strong>Regional Direct–Compensatory Representation</strong>. It uses a single vote, as now, and three steps:</p>
+  <ol class="steps">
+    <li><strong>Divide the country into the 12 regions</strong> (England&rsquo;s nine, plus Scotland, Wales and Northern Ireland). Each gets a fixed number of seats, 650 in total. About half are ordinary local constituencies, roughly twice the size of today&rsquo;s.</li>
+    <li><strong>Vote as normal.</strong> You vote for one local candidate. Whoever tops the poll in each constituency wins that seat outright.</li>
+    <li><strong>Top up the region.</strong> Add up each party&rsquo;s votes across the region to work out how many seats it &ldquo;deserves&rdquo;. Parties with fewer local wins than that receive extra seats, awarded to their best-placed candidates who didn&rsquo;t win locally, until the region&rsquo;s seats are all filled. Parties below a minimum vote share (the proposal uses 3%) don&rsquo;t qualify for top-ups.</li>
+  </ol>
+  <p>Because the top-up is calculated from the same single vote, there&rsquo;s no second ballot to game. That is the main design difference from the German-style systems this resembles.</p>
+  <div class="callout warn"><strong>What this page is not</strong>
+  Nobody has drawn the 327 new constituencies. The &ldquo;local seats&rdquo; in these runs are <em>scenario assumptions</em> based on who won in 2024. Part of the finding is that the national result barely depends on those assumptions, because the top-up absorbs the differences. It is also a static counterfactual: it applies the new rules to votes cast under the old ones. Voters would behave differently, so treat this as an illustration, not a forecast.</div>
+</section>
+
+<section id="explore">
+  <h2>Try it yourself</h2>
+  <p>This runs the allocation in your browser on the corrected 2024 regional vote totals. Move the sliders and watch the 650 seats change. Every square is one seat.</p>
+  <div class="explorer">
+    <div class="presets" aria-label="Presets">
+      <button id="p-proposed" type="button">As proposed (3% threshold)</button>
+      <button id="p-central" type="button">Green Paper central (5%)</button>
+      <button id="p-high" type="button">High threshold (7%)</button>
+      <button id="p-6040" type="button">60:40 neutral anchors</button>
+    </div>
+    <div class="controls">
+      <div class="ctl">
+        <label for="thr">Qualifying threshold <output id="thr-out">5.0%</output></label>
+        <input id="thr" type="range" min="2" max="8" step="0.5" value="5">
+        <small>Minimum share of a region&rsquo;s vote a party needs to receive top-up seats.</small>
+      </div>
+      <div class="ctl">
+        <label>Local-seat scenario</label>
+        <div class="seg">
+          <button id="mode-central" type="button" aria-pressed="true">Green Paper central</button>
+          <button id="mode-neutral" type="button" aria-pressed="false">Neutral anchors</button>
+        </div>
+        <small>Central: the paper&rsquo;s hand-set local wins. Neutral: 2024 local wins scaled to fit by a fixed rule.</small>
+      </div>
+      <div class="ctl">
+        <label for="shr">Local : top-up split <output id="shr-out">50:50</output></label>
+        <input id="shr" type="range" min="40" max="65" step="1" value="50" disabled>
+        <small id="shr-note"></small>
+      </div>
+    </div>
+
+    <p id="explorer-error" class="callout warn" hidden></p>
+    <div class="hemi" id="hemi" role="img" aria-label="Seat grid"></div>
+    <div class="legend" id="legend"></div>
+
+    <div class="readouts">
+      <div class="readout"><b id="r-largest">–</b><span id="r-largest-s">seats for the largest party</span></div>
+      <div class="readout"><b id="r-short">–</b><span>seats short of a 326 majority</span></div>
+      <div class="readout"><b id="r-gi">–</b><span>Gallagher index (small parties &amp; independents counted)</span></div>
+      <div class="readout"><b id="r-gx">–</b><span>Gallagher index (excluding that residual)</span></div>
+      <div class="readout"><b id="r-const">–</b><span>local / top-up seats</span></div>
+    </div>
+
+    <h3>Votes to seats, by party</h3>
+    <div class="keyline"><span class="kv">Share of votes</span><span class="ks">Share of seats</span></div>
+    <div class="bars" id="bars"></div>
+
+    <h3>Look inside one region</h3>
+    <label for="region" class="sr">Region</label>
+    <select id="region"></select>
+    <div id="region-table"></div>
+  </div>
+  <noscript><p class="callout warn">The interactive section needs JavaScript. The static results are in the next section.</p></noscript>
+</section>
+
+<section id="findings">
+  <h2>What the independent re-run found</h2>
+  <p>We rebuilt the model from scratch: new data path, new code written only from the paper&rsquo;s written description, and a tougher robustness test. The votes come from the House of Commons Library&rsquo;s corrected 2024 results file for all 650 constituencies. We checked it totals exactly 28,809,340 valid votes and that every party&rsquo;s national total matches the published figure.</p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Party</th><th>Vote share</th><th>FPTP 2024</th><th>Proposal, 5%</th><th>Proposal, 3%</th></tr></thead>
+    <tbody>
+      <tr><td>Labour</td><td>33.7%</td><td>411</td><td>234</td><td>233</td></tr>
+      <tr><td>Conservative</td><td>23.7%</td><td>121</td><td>160</td><td>160</td></tr>
+      <tr><td>Reform UK</td><td>14.3%</td><td>5</td><td>96</td><td>96</td></tr>
+      <tr><td>Liberal Democrat</td><td>12.2%</td><td>72</td><td>78</td><td>78</td></tr>
+      <tr><td>Green (all)</td><td>6.75%</td><td>4</td><td>41</td><td><b>44</b></td></tr>
+      <tr><td>SNP</td><td>2.5%</td><td>9</td><td>17</td><td>16</td></tr>
+      <tr><td>Plaid Cymru</td><td>0.7%</td><td>4</td><td>5</td><td>4</td></tr>
+      <tr><td>NI parties &amp; Speaker</td><td>2.6%</td><td>18</td><td>19</td><td>19</td></tr>
+      <tr><td>Independents</td><td>in &ldquo;others&rdquo;</td><td>6</td><td>0</td><td>0</td></tr>
+    </tbody></table></div>
+  <p style="font-size:.88rem;color:var(--muted)">Using the Green Paper&rsquo;s own central local-seat scenario. NI parties and Speaker: SF, DUP, Alliance, UUP, SDLP, TUV plus the Speaker. The Greens gain at 3% because the Scottish and Welsh Greens then qualify, at the expense of one seat each for Labour, the SNP and Plaid.</p>
+
+  <h3>The main results</h3>
+  <ul class="tight">
+    <li><strong>Seats track votes closely.</strong> The Gallagher index falls from about 23.8 to about 3.1, or from 23.2 to 1.0 when the unrepresentable residual is left out. Either way, most of the mismatch disappears. The two figures differ because 3.5% of votes went to small parties and independents that the model cannot give seats to.</li>
+    <li><strong>No party gets near a majority.</strong> Labour&rsquo;s 234 is 92 short of 326. Labour + Lib Dems reach 312. Adding the SNP gives 329, or adding the Greens gives 353. The right-of-centre parties (Con, Reform, DUP, UUP, TUV) reach 264. Any parliament under this system would be a coalition or an agreement between parties.</li>
+    <li><strong>The result barely depends on who wins locally.</strong> We tried thousands of alternative local-seat patterns, including ones where Reform and the Greens win local seats they didn&rsquo;t win in 2024. In seven of twelve regions the final seat totals didn&rsquo;t change at all, and nationally Labour moved only between 233 and 238. That is the system&rsquo;s strongest property: it makes the constituency map much less decisive.</li>
+    <li><strong>The settings matter more than the maps.</strong> Raising the threshold to 7% cuts the Greens from 41 to 23. Moving to a 60:40 local/top-up split lets Labour reach 252 and brings the Gallagher index (excluding the residual) from about 1.1 to 3.2. Around 50:50 to 55:45 the system stays close to proportional; beyond that it degrades.</li>
+    <li><strong>Independents lose out.</strong> Six independents won in 2024. The model returns none, unless they win a local seat outright, because top-up seats go to parties.</li>
+  </ul>
+  <p>The full method, sensitivity tables and every number are in the <a href="downloads/rdcr_independent_report.md">report</a>, and the <a href="#data">code and data</a> are published so you can check them.</p>
+</section>
+
+<section id="compare">
+  <h2>Two models, one conclusion</h2>
+  <p>This site rests on a comparison of two independent builds: the original Green Paper model and an audit, and a separate re-run built without using its code or its transcribed data. Where two different builds agree, that&rsquo;s better evidence than either alone.</p>
+  <div class="grid2">
+    <div class="card"><strong>Where they agree</strong>
+      <ul class="tight">
+        <li>All twelve regional lists of 2024 winners match the official file exactly.</li>
+        <li>Eleven of twelve regions give identical results on the same local-seat scenario.</li>
+        <li>The formula&rsquo;s mechanics (the Speaker, thresholds, overhang) behave as documented.</li>
+        <li>Threshold and split sensitivities point the same way.</li>
+        <li>The robustness property survives a harder test.</li>
+      </ul></div>
+    <div class="card"><strong>Where they differ</strong>
+      <ul class="tight">
+        <li><strong>One seat nationally:</strong> Labour 234 / Con 160 on the corrected data, against 233 / 161 published. The Green Paper&rsquo;s North West totals are about 25,000 Labour votes short of the official file.</li>
+        <li>The audit&rsquo;s North East &ldquo;correction&rdquo; doesn&rsquo;t match the current official edition. The original figures were right.</li>
+        <li>The Green Paper&rsquo;s 3% and ratio tables can&rsquo;t be reproduced from its own central scenario.</li>
+        <li>Disproportionality figures depend on whether the small-party residual is counted, and the paper doesn&rsquo;t say which it used.</li>
+      </ul></div>
+  </div>
+  <div class="callout good"><strong>Verdict</strong>
+  The two builds reinforce each other on everything about the mechanism. The disagreements all trace to input data and bookkeeping, not to the design. The headline result changes by one seat. We would still regenerate every published table from the corrected data before quoting it.</div>
+</section>
+
+<section id="suitability">
+  <h2>Would it suit the UK?</h2>
+  <p>The numbers above can say what the system does. Whether it is a good idea is partly a matter of values, so we separate what we can show from what we can only argue.</p>
+
+  <h3>As an electoral system in general</h3>
+  <div class="pros-cons">
+    <div class="card"><strong>Strengths</strong>
+      <ul>
+        <li>Seats closely track votes among parties above the threshold.</li>
+        <li>Every constituency still has a local MP.</li>
+        <li>One vote means no second ballot to exploit. Some two-vote hybrid systems have been gamed by parties running decoy lists, as in Albania&rsquo;s 2005 election.</li>
+        <li>The chamber stays at exactly 650 seats. Some German-style systems grow when parties win more local seats than their share.</li>
+        <li>Little incentive to redraw boundaries for advantage, since the top-up absorbs the effect.</li>
+      </ul></div>
+    <div class="card"><strong>Weaknesses</strong>
+      <ul>
+        <li><strong>Independents</strong> are effectively shut out of top-up seats.</li>
+        <li><strong>Ranking top-up candidates</strong> by vote percentage favours candidates from safe seats with few rivals. It brings back some of the geography the system is meant to neutralise. Ranking by raw votes, or a short party list, are common fixes.</li>
+        <li><strong>The seat-by-seat rounding rule</strong> can move a seat between parties. A standard divisor method would be easier to defend.</li>
+        <li><strong>Threshold choices</strong> carry real stakes: 3% versus 5% shifts five seats among four parties.</li>
+        <li>Voters can&rsquo;t back a local candidate from one party and a different party for the top-up.</li>
+      </ul></div>
+  </div>
+
+  <h3>For the UK specifically</h3>
+  <ul class="tight">
+    <li><strong>Coalition becomes normal.</strong> On 2024 votes no party gets close to a majority. Westminster has coped with hung parliaments in 2010 and 2017, but its habits are built around single-party government.</li>
+    <li><strong>Constituencies get bigger.</strong> 327 seats of about 145,000 electors, roughly twice today&rsquo;s size. Rural and island areas feel this most.</li>
+    <li><strong>The regional split is a hidden choice.</strong> The Green Paper&rsquo;s regional seat numbers match a split by total population, not by registered voters as now. That moves London from 75 to 85 seats and Scotland from 57 to 52. The effect on party totals is small, but who counts is a constitutional question and should be debated openly.</li>
+    <li><strong>Scotland and Wales.</strong> The SNP would hold 17 seats on 2024 votes (9 under FPTP), with some protection from wipe-outs. A 3% threshold lets the Scottish and Welsh Greens in, which is a flashpoint with the SNP and Plaid.</li>
+    <li><strong>Northern Ireland</strong> is the most sensitive region to method and scenario, with seats at stake between unionist and nationalist parties. It needs its own consultation.</li>
+    <li><strong>Behaviour would change.</strong> Tactical voting is widely reported to have mattered in 2024, and this system would remove much of the reason for it. That could mean more votes for smaller parties than modelled here. We can&rsquo;t measure that from the 2024 data, so treat the seat totals shown as an illustration, not a prediction.</li>
+    <li><strong>Adoption is a separate question.</strong> The 2011 AV referendum failed with far less change on offer. This page addresses suitability only.</li>
+  </ul>
+  <div class="callout"><strong>Our overall read</strong>
+  As engineering, the design is sound and now checked twice: proportional, hard to game, and robust to boundary choices. Its weak points (candidate ranking, rounding rule, independents) can be fixed without changing the architecture. As a UK proposal, the honest summary is permanent coalition politics, much larger constituencies, and three technical settings (threshold, ranking rule, regional split) that quietly decide who governs and so belong in the public argument.</div>
+</section>
+
+<section id="data">
+  <h2>Data, code and checking our work</h2>
+  <p>Everything is published so you can reproduce it. All vote counts come from the <a href="https://commonslibrary.parliament.uk/research-briefings/cbp-10009/">House of Commons Library&rsquo;s 2024 general election results</a> (corrected edition, changes logged to 5 January 2026).</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>File</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td><a href="downloads/rdcr_independent_report.md">rdcr_independent_report.md</a></td><td>Full report: our results, the two-model comparison, suitability analysis</td></tr>
+      <tr><td><a href="downloads/rdcr_independent_reproducibility.py">rdcr_independent_reproducibility.py</a></td><td>Self-contained Python script; run it to reproduce every number</td></tr>
+      <tr><td><a href="downloads/rdcr_independent_model.xlsx">rdcr_independent_model.xlsx</a></td><td>Workbook: regional votes, allocation by region, national summary, sensitivity</td></tr>
+      <tr><td><a href="downloads/uk_ge2024_regional_votes_reconciled.csv">uk_ge2024_regional_votes_reconciled.csv</a></td><td>Reconciled votes for the twelve regions</td></tr>
+      <tr><td><a href="downloads/ge2024_by_constituency_reconciled.csv">ge2024_by_constituency_reconciled.csv</a></td><td>The 650-row constituency file the regional totals are built from</td></tr>
+      <tr><td><a href="downloads/rdcr_independent_results.csv">rdcr_independent_results.csv</a></td><td>Seats by region at 5% and 3%</td></tr>
+      <tr><td><a href="data/model-data.json">data/model-data.json</a></td><td>The data this page&rsquo;s interactive runs on</td></tr>
+      <tr><td><a href="assets/engine.js">assets/engine.js</a></td><td>The allocation engine used above (JavaScript); checked against the Python results</td></tr>
+    </tbody></table></div>
+  <div class="callout warn"><strong>Known limits</strong>
+  Local-seat inputs are scenario assumptions, not real constituencies. The model applies new rules to old votes. Direct comparison with published disproportionality figures needs the residual convention stated. Where we&rsquo;ve made a choice (for example, splitting NI minor parties out of the Library&rsquo;s &ldquo;other candidates&rdquo; column using their official national totals), the method notes in the script say so.</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Independent re-run prepared with Claude (Anthropic) from the House of Commons Library&rsquo;s open data. This is an explainer, not a forecast or a policy position.</p>
+  </div>
+</footer>
+
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
